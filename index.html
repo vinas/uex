@@ -1,0 +1,41 @@
+
+<html ng-app="usersrest">
+<head>
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<script type="text/javascript" src="http://vinas.pe.hu/Application/View/js/libs/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="js/scripts.js"></script>
+	<script type="text/javascript" src="js/controllers/users-controller.js"></script>
+	<script type="text/javascript" src="js/directives/users-directives.js"></script>
+
+	<link href="css/bootstrap.min.css" rel="stylesheet"/>
+	<link href="http://vinas.pe.hu/Application/View/css/main.css" rel="stylesheet"/>
+	<link href="css/menu.css" rel="stylesheet"/>
+</head>
+<body ng-controller="UsersController">
+	<div class="menu">
+	<div href="http://vinas.pe.hu/Users/listUsers/" class="item">List Users</div>
+	<div href="http://vinas.pe.hu/Users/newUser/" class="item" >New User (Normal)</div>
+	<div href="http://vinas.pe.hu/Users/newUserJson/" class="item" >New User (Json Response)</div>
+	<div id="message" class="message"></div>
+	<div class="container">
+		<b>List of users</b>
+		<br><br>
+		<table border="1" cellpassing="0" cellspacing="0">
+		<tbody>
+			<tr>
+				<td><b>id</b></td>
+				<td><b>user</b></td>
+				<td><b>email</b></td>
+				<td></td>
+			</tr>
+			<tr ng-repeat="user in users">
+				<td><a href="/Users/edit/{{user.id}}">{{user.id}}</a></td>
+				<td>{{user.user}}</td>
+				<td>{{user.email}}</td>
+				<td><a href="/Users/delete/{{user.id}}">delete</a></td>
+			</tr>
+		</tbody>
+		</table>
+	</div>
+</body>
+</html>
