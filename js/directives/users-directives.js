@@ -1,8 +1,4 @@
-angular.module('usersDirectives', [])
+angular.module('usersrest', [])
 .directive('usersList', function() {
-	var ddo = {};
-	ddo.restrict = "AE";
-	ddo.transclude = true;
-	ddo.templateUrl = 'js/directives/users-list.html';
-	return ddo;
+	return { templateUrl: 'js/directives/users-list.html' };
 });

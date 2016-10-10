@@ -2,7 +2,6 @@
 <html ng-app="usersrest">
 <head>
 	<script type="text/javascript" src="js/angular.min.js"></script>
-	<script type="text/javascript" src="http://vinas.pe.hu/Application/View/js/libs/jquery-2.1.1.min.js"></script>
 	<script type="text/javascript" src="js/scripts.js"></script>
 	<script type="text/javascript" src="js/controllers/users-controller.js"></script>
 	<script type="text/javascript" src="js/directives/users-directives.js"></script>
@@ -21,19 +20,7 @@
 		<b>List of users</b>
 		<br><br>
 		<table border="1" cellpassing="0" cellspacing="0">
-		<tbody>
-			<tr>
-				<td><b>id</b></td>
-				<td><b>user</b></td>
-				<td><b>email</b></td>
-				<td></td>
-			</tr>
-			<tr ng-repeat="user in users">
-				<td><a href="/Users/edit/{{user.id}}">{{user.id}}</a></td>
-				<td>{{user.user}}</td>
-				<td>{{user.email}}</td>
-				<td><a href="/Users/delete/{{user.id}}">delete</a></td>
-			</tr>
+		<tbody users-list>
 		</tbody>
 		</table>
 	</div>

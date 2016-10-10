@@ -1,6 +1,12 @@
-<tr>
-	<td><a href="/Users/edit/{{id}}">{{id}}</a></td>
-	<td>{{user}}</td>
-	<td>{{email}}</td>
-	<td><a href="/Users/delete/{{id}}">delete</a></td>
-</tr>
+	<tr>
+		<td><b>id</b></td>
+		<td><b>user</b></td>
+		<td><b>email</b></td>
+		<td></td>
+	</tr>
+	<tr ng-repeat="user in users">
+		<td><a href="/Users/edit/{{user.id}}">{{user.id}}</a></td>
+		<td>{{user.user}}</td>
+		<td>{{user.email}}</td>
+		<td><a href="/Users/delete/{{user.id}}">delete</a></td>
+	</tr>
