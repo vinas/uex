@@ -1,28 +1,23 @@
 
-<html ng-app="usersrest">
+<html>
 <head>
+	<base href="/">
 	<script type="text/javascript" src="js/angular.min.js"></script>
-	<script type="text/javascript" src="js/scripts.js"></script>
+	<script type="text/javascript" src="js/angular-route.min.js"></script>
+	<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src="js/controllers/home-controller.js"></script>
 	<script type="text/javascript" src="js/controllers/users-controller.js"></script>
-	<script type="text/javascript" src="js/directives/users-directives.js"></script>
+	<!--script type="text/javascript" src="js/directives/users-directives.js"></script-->
 
 	<link href="css/bootstrap.min.css" rel="stylesheet"/>
-	<link href="http://vinas.pe.hu/Application/View/css/main.css" rel="stylesheet"/>
 	<link href="css/menu.css" rel="stylesheet"/>
 </head>
-<body ng-controller="UsersController">
-	<div class="menu">
-	<div href="http://vinas.pe.hu/Users/listUsers/" class="item">List Users</div>
-	<div href="http://vinas.pe.hu/Users/newUser/" class="item" >New User (Normal)</div>
-	<div href="http://vinas.pe.hu/Users/newUserJson/" class="item" >New User (Json Response)</div>
-	<div id="message" class="message"></div>
-	<div class="container">
-		<b>List of users</b>
-		<br><br>
-		<table border="1" cellpassing="0" cellspacing="0">
-		<tbody users-list>
-		</tbody>
-		</table>
+<body>
+	<!--div class="container" id="container" ng-controller="UsersController"-->
+	<div class="container" ng-app="app">
+		<header ng-include="'templates/menu.html'"></header>
+		<div ng-view></div>
 	</div>
 </body>
 </html>
