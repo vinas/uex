@@ -33,16 +33,20 @@ app.controller('usersController', function($scope, $http, UsersFactory, UsersSer
 
 	$scope.save = function()
 	{
-
-		// if (isUserDataValid($scope.user)) {
-		// 	UsersService.save()
-		// 		.success(function(user) {
-		// 			$scope.templateURL = 'templates/users-list.html';
-	 //        	})
-	 //            .error(function(response, status) {
-	 //                console.log("Error: " + response + "\nStatus: " + status);
-	 //            });
-		// }
+		if (UsersService.isUserDataValid($scope.user)) {
+			UsersService.save($scope.user)
+				.success(function(user) {
+					if ($scope.user.id > 0) {
+						console.log('ver o que fazer depois');
+					} else {
+						$scope.users.push(user);
+					}
+					$scope.templateURL = 'templates/users-list.html';
+	        	})
+	            .error(function(response, status) {
+	                console.log("Error: " + response + "\nStatus: " + status);
+	            });
+		}
 	};
 
   //   $scope.deleteUser = function(id) {
