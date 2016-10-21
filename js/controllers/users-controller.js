@@ -1,31 +1,55 @@
-app.controller('usersController', function($scope, $http) {
+app.controller('usersController', function($scope, $http, UsersFactory, UsersService) {
  	
- 	$scope.users = [];
- 	$http.get('http://vinas.pe.hu/Users/listUsers/')
- 	.then(
- 		function(res) {
- 			$scope.users = res.data;
- 			$scope.templateURL = 'js/directives/users-list.html';
- 		}
-	).catch(function(err){
-		console.log(err);
-	});
+ 	$scope.listUsers = function()
+ 	{
+		UsersFactory.getUsersList()
+            .success(function(users) {
+                $scope.users = users;
+				$scope.templateURL = 'templates/users-list.html';
+            })
+            .error(function(res, status) {
+                console.log("Error: " + res + "\nStatus: " + status);
+            }
+		);
+	};
+	
+	$scope.getUser = function(id)
+	{
+		UsersFactory.getUserById(id)
+            .success(function(user) {
+                $scope.user = user;
+				$scope.templateURL = 'templates/users-form.html';
+            })
+            .error(function(response, status) {
+                console.log("Error: " + response + "\nStatus: " + status);
+            });
+	};
 
-    $scope.getUser = function(id) {
-	 	$http.get('http://vinas.pe.hu/Users/getUser/'+id)
-	 	.then(
-	 		function(res) {
-	 			$scope.user = res.data;
-			    $scope.templateURL = 'js/directives/users-form.html';
-	 		}
-		).catch(function(err){
-			console.log(err);
-		});
-    };
+	$scope.newUser = function()
+	{
+		$scope.user = {};
+		$scope.templateURL = 'templates/users-form.html';
+	};
+
+	$scope.save = function()
+	{
+
+		// if (isUserDataValid($scope.user)) {
+		// 	UsersService.save()
+		// 		.success(function(user) {
+		// 			$scope.templateURL = 'templates/users-list.html';
+	 //        	})
+	 //            .error(function(response, status) {
+	 //                console.log("Error: " + response + "\nStatus: " + status);
+	 //            });
+		// }
+	};
 
   //   $scope.deleteUser = function(id) {
   //       confirm("delete " + id + "?");
   //   };
 
+	$scope.users = [];
+	$scope.listUsers();
 
 });
