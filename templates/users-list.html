@@ -1,4 +1,4 @@
-<a ng-click="newUser()" ng-style="style" ng-mouseover="style={'cursor': 'pointer'}" ng-mouseleave="style={'cursor': 'default'}">new user</a>
+<a ng-href="#/users/new">new user</a>
 <br/><br/>
 <span>filter: </span><input type="text" ng-model="q" />
 <br/><br/>
@@ -14,10 +14,10 @@
 	</tr>
 	<tr ng-repeat="user in users| filter: q | orderBy: 'user'">
 
-		<td ng-click="getUser(user.id)" ng-style="style" ng-mouseover="style={'cursor': 'pointer'}" ng-mouseleave="style={'cursor': 'default'}">{{user.id}}</td>
-		<td ng-click="getUser(user.id)" ng-style="style" ng-mouseover="style={'cursor': 'pointer'}" ng-mouseleave="style={'cursor': 'default'}">{{user.user}}</td>
-		<td ng-click="getUser(user.id)" ng-style="style" ng-mouseover="style={'cursor': 'pointer'}" ng-mouseleave="style={'cursor': 'default'}">{{user.email}}</td>
-		<td ng-click="deleteUser(user.id)" ng-style="style" ng-mouseover="style={'cursor': 'pointer'}" ng-mouseleave="style={'cursor': 'default'}">delete</td>
+		<td ng-click="goEditUser(user.id)" ng-style="style" ng-mouseover="style={'cursor': 'pointer'}" ng-mouseleave="style={'cursor': 'default'}">{{user.id}}</td>
+		<td ng-click="goEditUser(user.id)" ng-style="style" ng-mouseover="style={'cursor': 'pointer'}" ng-mouseleave="style={'cursor': 'default'}">{{user.user}}</td>
+		<td ng-click="goEditUser(user.id)" ng-style="style" ng-mouseover="style={'cursor': 'pointer'}" ng-mouseleave="style={'cursor': 'default'}">{{user.email}}</td>
+		<td ng-click="delete(user.id)" ng-style="style" ng-mouseover="style={'cursor': 'pointer'}" ng-mouseleave="style={'cursor': 'default'}">delete</td>
 	</tr>
 </tbody>
 </table>

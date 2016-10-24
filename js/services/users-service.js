@@ -1,12 +1,13 @@
-app.service('UsersService', function($http) {
+app.service('UsersService', function($http, UsersFactory) {
 
 	this.save = function(user)
 	{
-		return $http.post('http://vinas.pe.hu/Users/save/', $.param(user),
-				{
-					headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
-        		}
-			);
+		return UsersFactory.save(user);
+	}
+
+	this.delete = function(id)
+	{
+		return UsersFactory.delete(id);
 	}
 
 	this.isUserDataValid = function(user)
@@ -20,6 +21,29 @@ app.service('UsersService', function($http) {
 		}
 		return true;
 	};
+
+	this.placeUserOnList = function(list, user)
+	{
+		for (i = 0; i < list.length; i++) {
+			if (list[i].id == user.id) {
+				list.splice(i, 1);
+				break;
+			}
+		}
+		list.push(user);
+		return list;
+	}
+
+	this.removeUserFromList = function(list, id)
+	{
+		for (i = 0; i < list.length; i++) {
+			if (list[i].id == id) {
+				list.splice(i, 1);
+				break;
+			}
+		}
+		return list;
+	}
 
 	return this;
 });

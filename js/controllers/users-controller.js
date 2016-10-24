@@ -1,4 +1,4 @@
-app.controller('usersController', function($scope, $http, UsersFactory, UsersService) {
+app.controller('usersController', function($scope, $http, $routeParams, $location, UsersFactory, UsersService) {
  	
  	$scope.listUsers = function()
  	{
@@ -12,6 +12,11 @@ app.controller('usersController', function($scope, $http, UsersFactory, UsersSer
             }
 		);
 	};
+
+	$scope.goEditUser = function(id)
+	{
+		$location.url('users/edit/'+id);
+	}
 	
 	$scope.getUser = function(id)
 	{
@@ -34,26 +39,50 @@ app.controller('usersController', function($scope, $http, UsersFactory, UsersSer
 	$scope.save = function()
 	{
 		if (UsersService.isUserDataValid($scope.user)) {
+			$scope.user.password = $scope.user.password1;
 			UsersService.save($scope.user)
 				.success(function(user) {
-					if ($scope.user.id > 0) {
-						console.log('ver o que fazer depois');
-					} else {
-						$scope.users.push(user);
+					if (user.code != 200) {
+						console.log('tratar erro: ' + user.message);
+						return false;
 					}
+					$scope.users = UsersService.placeUserOnList($scope.users, user);
 					$scope.templateURL = 'templates/users-list.html';
 	        	})
 	            .error(function(response, status) {
 	                console.log("Error: " + response + "\nStatus: " + status);
 	            });
+		} else {
+			console.log('tratar erro: invalid data form.');
 		}
 	};
 
-  //   $scope.deleteUser = function(id) {
-  //       confirm("delete " + id + "?");
-  //   };
+	$scope.delete = function(id) {
+		if (confirm('You sure?')) {
+			UsersService.delete(id)
+				.success(function(res) {
+					if (res.code != 200) {
+						console.log('tratar erro: ' + res.message);
+						return false;
+					}
+					$scope.users = UsersService.removeUserFromList($scope.users, id);
+	        	})
+	            .error(function(response, status) {
+	                console.log("Error: " + response + "\nStatus: " + status);
+	            });
+
+		}
+	};
+
+	var init = function() {
+		if ($routeParams.id) {
+			$scope.getUser($routeParams.id);
+		} else {
+			$scope.listUsers();
+		}
+	};
 
 	$scope.users = [];
-	$scope.listUsers();
+	init();
 
 });
