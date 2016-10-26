@@ -61,7 +61,7 @@ app.controller('usersController', function($scope, $http, $routeParams, $locatio
 		if (confirm('You sure?')) {
 			UsersService.delete(id)
 				.success(function(res) {
-					if (res.code != 200) {
+					if (res.code != 202) {
 						console.log('tratar erro: ' + res.message);
 						return false;
 					}
